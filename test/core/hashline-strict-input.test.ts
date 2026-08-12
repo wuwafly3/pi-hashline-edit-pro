@@ -108,14 +108,14 @@ describe("partial hash prefixes copied into content (issue #24)", () => {
     expect(result.warnings?.[0]).toMatch(/replacement_text line 1, replacement_text line 3/);
 	});
 
-	it("keeps indentation after the separator while dropping leading prefix whitespace", async () => {
+	it("preserves leading indentation and indentation after separator when stripping prefix", async () => {
 		const hashes = await lineHashes(file, home.testPath);
 		const anchor = hashes[0]!;
 		const result = applyTool(
       { remove_from: anchor,
-      remove_to: anchor, replacement_text: `  ${hashes[1]!}│  indented` },
+      remove_to: anchor, replacement_text: `\t${hashes[1]!}│\tindented` },
     hashes);
-    expect(result.content).toBe("  indented\nbeta\ngamma\ndelta");
+    expect(result.content).toBe("\t\tindented\nbeta\ngamma\ndelta");
 	});
 
 	it("accepts a single legit 'TS: TypeScript' line without warning", async () => {

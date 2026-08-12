@@ -220,8 +220,8 @@ export function stripBarePrefixes(
 	const contentLines = edit.content_lines.map((line, lineIndex) => {
 		const match = line.match(HL_BARE_PREFIX_RE);
 		if (!match) return line;
-		stripped.push({ lineIndex, matched: fileHashSet.has(match[1]!) });
-		return line.slice(match[0].length);
+		stripped.push({ lineIndex, matched: fileHashSet.has(match[2]!) });
+		return `${match[1]!}${line.slice(match[0].length)}`;
 	});
 	if (stripped.length === 0) return edit;
 	const locations = stripped
