@@ -45,7 +45,7 @@ export const HL_PREFIX_MINUS_RE = new RegExp(
 	`^-(?:${HASH_CLASS}│| {${ANCHOR_LEN}}│)`,
 );
 
-export const HL_BARE_PREFIX_RE = new RegExp(`^\\s*(${HASH_CLASS})│`);
+export const HL_BARE_PREFIX_RE = new RegExp(`^(\\s*)(${HASH_CLASS})│`);
 
 export function canon(line: string): string {
 	return line.replace(/\r/g, "").trimEnd();
